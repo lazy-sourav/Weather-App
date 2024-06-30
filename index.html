@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>Weather app</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <style>
         body {
             background-color: black;
@@ -54,7 +56,6 @@
         }
 
         #text {
-            text-align: center;
             margin: 10px;
         }
 
@@ -63,11 +64,7 @@
             margin: 0 auto;
         }
 
-        #rain {
-            display: inline;
-            font-size: 20px;
-        }
-
+        #rain,
         #wind {
             display: inline;
             font-size: 20px;
@@ -75,6 +72,24 @@
 
         #ww {
             margin-left: 11px;
+        }
+
+        @media only screen and (max-width : 500px) {
+
+            .container {
+                padding: 10px;
+                width: 90vw;
+                box-sizing: border-box;
+            }
+
+            p {
+                font-size: 2rem;
+            }
+
+            #rain,
+            #wind {
+                font-size: 1.6rem;
+            }
         }
     </style>
 </head>
