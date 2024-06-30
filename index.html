@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Weather app</title>
+    <style>
+        body {
+            background-color: black;
+        }
+
+        p {
+            font-size: 25px;
+            text-align: center;
+        }
+
+        .container {
+            background-color: #bde0fe;
+            margin: 0 auto;
+            border: 2px solid red;
+            border-radius: 10px;
+            padding: 10px;
+            width: 300px;
+        }
+
+        #city {
+            height: 25px;
+            font-size: 25px;
+            border-radius: 15px;
+            border: 2px solid red;
+            width: 85%;
+        }
+
+        #btn {
+            height: 25px;
+            width: 10%;
+            border: 2px solid red;
+            border-radius: 5px;
+            padding: 0;
+
+
+        }
+
+        #btn img {
+            height: 90%;
+            border-radius: 5px;
+        }
+
+        #err {
+            font-size: 14px;
+            text-align: left;
+            margin: 8px 5px;
+            color: red;
+            display: none;
+        }
+
+        #text {
+            text-align: center;
+            margin: 10px;
+        }
+
+        #image {
+            display: block;
+            margin: 0 auto;
+        }
+
+        #rain {
+            display: inline;
+            font-size: 20px;
+        }
+
+        #wind {
+            display: inline;
+            font-size: 20px;
+        }
+
+        #ww {
+            margin-left: 11px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="nav">
+            <input type="text" id="city" placeholder="enter the city name">
+            <button id="btn"><img src="search.png"></button>
+            <p id="err">Invalid City Name Please Retry :)</p>
+        </div>
+        <div class="weather">
+            <p id="text">sunny</p>
+            <img src="sunny.webp" alt="weather image" id="image">
+            <p id="loc">location</p>
+            <p id="temp">Temparature - 22'c</p>
+            <p id="feelslike">Feels Like - 24'c</p>
+            <img src="rain.png" height=20px>
+            <div id="rain"> Rain - 3mm </div>
+            <img src="wind.png" height="20px" id="ww">
+            <div id="wind"> Wind - 400km/h</div>
+        </div>
+    </div>
+
+    <script>
+        async function func(cityName) {
+
+            let key = "8c8786c5befc4a4cb66161131242906"
+            console.log("calling")
+            let weather = await fetch(`http://api.weatherapi.com/v1/current.json?key=${key}&q=${cityName}`);
+            console.log("fetched")
+            if (weather.status != 200) {
+                console.log("Invalid request " + weather.status);
+                document.querySelector("#err").setAttribute("style", "display:block")
+                document.querySelector(".weather").setAttribute("style", "display:none")
+                return;
+            }
+            document.querySelector("#err").setAttribute("style", "display:none")
+            let Data = await weather.json();
+            console.log(Data);
+            document.getElementById("text").innerText = Data.current.condition.text
+            document.getElementById("image").src = Data.current.condition.icon
+            document.getElementById("loc").innerText = Data.location.name;
+            document.getElementById("temp").innerText = `Temparature : ${Data.current.temp_c}`
+            document.getElementById("feelslike").innerText = `Feel like : ${Data.current.feelslike_c}`
+            document.getElementById("rain").innerText = ` Rain : ${Math.trunc(Data.current.precip_mm)} mm`
+            document.getElementById("wind").innerText = ` Wind : ${Math.trunc(Data.current.wind_kph)} km/h`
+
+            document.querySelector(".weather").setAttribute("style", "display:block")
+        }
+
+        func("kolkata");
+        btn.addEventListener("click", async () => {
+            let cityName = document.getElementById("city").value;
+            func(cityName)
+            document.getElementById("city").value = '';
+        })
+        window.addEventListener("keypress", () => {
+            let val = document.getElementById("city").value;
+            if (event.key == "Enter" && val != '') {
+                func(val);
+                document.getElementById("city").value = '';
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>
