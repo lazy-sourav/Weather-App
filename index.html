@@ -106,7 +106,7 @@
 
             let key = "8c8786c5befc4a4cb66161131242906"
             console.log("calling")
-            let weather = await fetch(`http://api.weatherapi.com/v1/current.json?key=${key}&q=${cityName}`);
+            let weather = await fetch(`https://api.weatherapi.com/v1/current.json?key=${key}&q=${cityName}`);
             console.log("fetched")
             if (weather.status != 200) {
                 console.log("Invalid request " + weather.status);
