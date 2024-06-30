@@ -104,11 +104,11 @@
             <p id="err">Invalid City Name Please Retry :)</p>
         </div>
         <div class="weather">
-            <p id="text">sunny</p>
+            <p id="text">weather</p>
             <img src="sunny.webp" alt="weather image" id="image">
             <p id="loc">location</p>
-            <p id="temp">Temparature - 22'c</p>
-            <p id="feelslike">Feels Like - 24'c</p>
+            <p id="temp">Temparaturec</p>
+            <p id="feelslike">Feels Like c</p>
             <img src="rain.png" height=20px>
             <div id="rain"> Rain - 3mm </div>
             <img src="wind.png" height="20px" id="ww">
@@ -135,8 +135,8 @@
             document.getElementById("text").innerText = Data.current.condition.text
             document.getElementById("image").src = Data.current.condition.icon
             document.getElementById("loc").innerText = Data.location.name;
-            document.getElementById("temp").innerText = `Temparature : ${Data.current.temp_c}`
-            document.getElementById("feelslike").innerText = `Feel like : ${Data.current.feelslike_c}`
+            document.getElementById("temp").innerText = `Temperature : ${Data.current.temp_c}`
+            document.getElementById("feelslike").innerText = `Feels like : ${Data.current.feelslike_c}`
             document.getElementById("rain").innerText = ` Rain : ${Math.trunc(Data.current.precip_mm)} mm`
             document.getElementById("wind").innerText = ` Wind : ${Math.trunc(Data.current.wind_kph)} km/h`
 
